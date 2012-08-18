@@ -168,10 +168,10 @@ def generate_flair(csv_file_out, img_file_out):
 
         
     ##] Crop the CSS Sprite
-    css_sprite.crop(0, 0, sprite_row * row_height, num_of_cols * column_width)
+    cropped_sprite = css_sprite.crop((0, 0, num_of_cols * column_width, sprite_row * row_height))
 
     ##] Save the CSS Sprite Image
-    css_sprite.save(img_file_out)
+    cropped_sprite.save(img_file_out)
 
     ##] Write all of our Flair CSS Classes to our CSV file for easy import through redditapi
     flair_csv = open(csv_file_out, "w")
