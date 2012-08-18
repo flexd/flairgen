@@ -108,12 +108,13 @@ def generate_flair(csv_file_out, img_file_out):
         ##] We have a different column of our sprite
         ##] image.
         temp_list = []
-        for item in jconfig['images'][category]:
-        	##] This will allow users to select a flair
-        	##] that is made up of only one image and not
-        	##] multiple images. For the WoW Reddit, this
-        	##] allows people to only represent Paladins,
-        	##] or only represent the Horde.
+        for item, filename in jconfig['images'][category].iteritems():
+            ##] This will allow users to select a flair
+            ##] that is made up of only one image and not
+            ##] multiple images. For the WoW Reddit, this
+            ##] allows people to only represent Paladins,
+            ##] or only represent the Horde.
+            
             css_classes.append(item)
             
             ##] Add the item to our temp_list so we can
