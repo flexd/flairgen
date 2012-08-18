@@ -22,9 +22,9 @@ import praw as reddit # Python Reddit API Wrapper
 ##] Super cool variables
 CONFIG_FILE = "settings.json"
 COOKIE_FILE = "reddit.cookie"
-FLAIR_CSV_FILE = "output/flair.csv"
-FLAIR_IMG_FILE = "output/flair.png"
-FLAIR_CSS_FILE = "output/flair.css"
+FLAIR_CSV_FILE = "../wowflair/flair.csv"
+FLAIR_IMG_FILE = "../wowflair/flair.png"
+FLAIR_CSS_FILE = "../wowflair/flair.css"
 #PNG_METADATA = 
 
 FLAIRGEN_START_BLOCK = "/***** [{{FLAIRGEN START DO NOT TOUCH}}] *****/"
