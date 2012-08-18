@@ -20,7 +20,7 @@
 	},
 	"config": {
 		"column_width": "18",
-		"column_height": "18",
+		"row_height": "18",
 		"column_order": {
 			"1": "factions",
 			"2": "classes"
