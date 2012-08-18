@@ -11,6 +11,7 @@ import sys
 import json
 import time
 import getpass
+import csv
 from itertools import product, chain
 
 ##] Import image library to generate sprites
@@ -90,9 +91,7 @@ def get_subreddit():
 
 def flair_from_csv(path):
     f = csv.reader(file(path))
-    # skip header row
-    f.next()
-    return dict((r[0], (r[1], r[2])) for r in f if r[1] or r[2])
+    return [(r[0], r[1], r[2]) for r in f]
 
 
 def generate_flair(csv_file_out, img_file_out, css_file_out):
@@ -166,7 +165,7 @@ def generate_flair(csv_file_out, img_file_out, css_file_out):
             ##]   background-position: 0px -80px;
             ##]   width: 18px
             ##] }
-            print sprite_row * row_height - row_height
+            #print sprite_row * row_height - row_height
             css = ".flair-{0}:after{{ content: \"\"; background-position: {1}px -{2}px; width: {3}px;}}\n".format(item, "0", sprite_row * row_height - row_height, column_width)
             css_file.write(css)
 
@@ -206,7 +205,7 @@ def generate_flair(csv_file_out, img_file_out, css_file_out):
 
         sprite_row += 1
 
-        
+    
     ##] Apply the CSS File footer and close it
     css_file.write(CSS_FOOTER)
     css_file.close()
@@ -240,11 +239,12 @@ def upload_flair(csv_file):
     ##] Get rid of old flair templates
     r.get_subreddit(subreddit).clear_flair_templates()
 
-    ##] Upload all our flair templates
-    flair_templates = flair_from_csv(FLAIR_CSV_FILE)
-
-    #for template in flair_templates:
-    #    r.get_subreddit().add_flair_template(text='editable', css_class='foo', text_editable=True)
+    ##] Retrieve flair templates from the csv file
+    flair_templates = flair_from_csv(csv_file)
+    
+    for template in flair_templates:
+    	print "Adding Flair Template {0} to /r/{1}".format(template[1], subreddit)
+        r.get_subreddit(subreddit).add_flair_template(template[0], template[1], template[2])
 
 
 def main():
@@ -271,7 +271,7 @@ def main():
             generate_flair(FLAIR_CSV_FILE, FLAIR_IMG_FILE, FLAIR_CSS_FILE)
 
         elif option == "UPLOAD":
-            upload_flair()
+            upload_flair(FLAIR_CSV_FILE)
 
         elif option == "HELP":
             print HELP_TEXT
