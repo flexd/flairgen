@@ -1,0 +1,21 @@
+{
+	"images": {
+		"factions": {
+			"alliance": "images/faction_alliance.png",
+			"horde":  "images/faction_horde.png"
+		},
+		"classes": {
+			"deathknight": "images/class_deathknight.gif",
+			"druid": "images/class_druid.gif",
+			"hunter": "images/class_hunter.gif",
+			"mage": "images/class_mage.gif",
+			"monk": "images/class_monk.gif",
+			"paladin": "images/class_paladin.gif",
+			"priest": "images/class_priest.gif",
+			"rogue": "images/class_rogue.gif",
+			"shaman": "images/class_shaman.gif",
+			"warlock": "images/class_warlock.gif",
+			"warrior": "images/class_warrior.gif",
+		}
+	}
+}
