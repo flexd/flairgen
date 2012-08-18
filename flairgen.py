@@ -83,6 +83,16 @@ def generate_flair(csv_file_out, img_file_out):
     ##] Read configuration file, store in variable
     jconfig = read_config(CONFIG_FILE)
 
+    ##] Create a huge container to store all the flair inside
+    ##] We will crop it when the image is finished
+    ##] Container should be able to fit 300 sprites based
+    ##] on the filesize.
+    column_width, column_height = int(jconfig['config']['column_width']), int(jconfig['config']['column_height'])
+    num_of_cols = len(jconfig['images'])
+    image_width, image_height = column_width * 300, column_height * num_of_cols
+
+    css_sprite = Image.new("RGBA", (image_width, image_height))
+
     ##] items_list is a list of lists. each list inside
     ##] of the list is a list of the items from the 
     ##] appropriate category.
