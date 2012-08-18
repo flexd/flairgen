@@ -17,5 +17,9 @@
 			"warlock": "images/class_warlock.gif",
 			"warrior": "images/class_warrior.gif",
 		}
+	},
+	"config": {
+		"column_width": "18",
+		"column_height": "18"
 	}
 }
