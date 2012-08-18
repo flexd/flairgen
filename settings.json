@@ -1,9 +1,5 @@
 {
 	"images": {
-		"factions": {
-			"alliance": "images/faction_alliance.png",
-			"horde":  "images/faction_horde.png"
-		},
 		"classes": {
 			"deathknight": "images/class_deathknight.gif",
 			"druid": "images/class_druid.gif",
@@ -16,6 +12,10 @@
 			"shaman": "images/class_shaman.gif",
 			"warlock": "images/class_warlock.gif",
 			"warrior": "images/class_warrior.gif"
+		},
+		"factions": {
+			"alliance": "images/faction_alliance.png",
+			"horde":  "images/faction_horde.png"
 		}
 	},
 	"config": {
