@@ -87,9 +87,9 @@ def generate_flair(csv_file_out, img_file_out):
     ##] We will crop it when the image is finished
     ##] Container should be able to fit 300 sprites based
     ##] on the filesize.
-    column_width, column_height = int(jconfig['config']['column_width']), int(jconfig['config']['column_height'])
+    column_width, row_height = int(jconfig['config']['column_width']), int(jconfig['config']['row_height'])
     num_of_cols = len(jconfig['images'])
-    image_width, image_height = column_width * num_of_cols, column_height * 300
+    image_width, image_height = column_width * num_of_cols, row_height * 300
 
     css_sprite = Image.new("RGBA", (image_width, image_height))
 
@@ -103,23 +103,45 @@ def generate_flair(csv_file_out, img_file_out):
     ##] csv file for importing into the redditapi
     css_classes = []
 
+    ##] To help us keep track of positioning
+    sprite_row = 1
+
+    
+    sprite_images = {}
     for category in jconfig['images']:
         ##] For each one of our custom categories,
         ##] We have a different column of our sprite
         ##] image.
         temp_list = []
-        for item, filename in jconfig['images'][category].iteritems():
+        
+        
+        for item, image_path in jconfig['images'][category].iteritems():
             ##] This will allow users to select a flair
             ##] that is made up of only one image and not
             ##] multiple images. For the WoW Reddit, this
             ##] allows people to only represent Paladins,
             ##] or only represent the Horde.
-            
             css_classes.append(item)
             
             ##] Add the item to our temp_list so we can
             ##] store it in our items_list when we are finished iterating.
             temp_list.append(item)
+
+            ##] Since this is our single image only column
+            ##] We need to create a spacer infront of it so
+            ##] the image is beside the persons name.
+            ##] This only works for Left sided flair atm
+            ##] Add the current flair to our image
+
+            sprite_images[item] = Image.open(image_path)
+            print sprite_images[item]
+
+            #current_image = Image.open(image_path)
+            image_width, image_height = sprite_images[item].size
+            css_sprite.paste(sprite_images[item], (column_width, sprite_row * row_height - row_height))
+
+            sprite_row += 1
+
 
         ##] Store the list of items from this particular
         ##] category inside of a list so that we can use it
@@ -132,13 +154,24 @@ def generate_flair(csv_file_out, img_file_out):
     ##] classes. Faction is the first flair image
     ##] and Class is the second flair image.
     for r in product(*items_list):
-    	##] Add the current flair piece to a list of CSS Classes
+        ##] Add the current flair piece to a list of CSS Classes
         css_classes.append("{0}-{1}".format(r[0], r[1]))
 
         ##] Add the current flair piece to our CSS Sprite image
+        derp = 0
+        for item in r:
+            image_width, image_height = sprite_images[str(item)].size
+            css_sprite.paste(sprite_images[item], (derp * column_width, sprite_row * row_height - row_height))
+            derp += 1
+
+        sprite_row += 1
+
+        
+    ##] Crop the CSS Sprite
+    css_sprite.crop(0, 0, sprite_row * row_height, num_of_cols * column_width)
 
     ##] Save the CSS Sprite Image
-
+    css_sprite.save("css_sprite.png")
 
     ##] Write all of our Flair CSS Classes to our CSV file for easy import through redditapi
     flair_csv = open(csv_file_out, "w")
