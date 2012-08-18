@@ -134,7 +134,6 @@ def generate_flair(csv_file_out, img_file_out):
             ##] Add the current flair to our image
 
             sprite_images[item] = Image.open(image_path)
-            print sprite_images[item]
 
             #current_image = Image.open(image_path)
             image_width, image_height = sprite_images[item].size
