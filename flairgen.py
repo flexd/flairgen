@@ -89,7 +89,7 @@ def generate_flair(csv_file_out, img_file_out):
     ##] on the filesize.
     column_width, column_height = int(jconfig['config']['column_width']), int(jconfig['config']['column_height'])
     num_of_cols = len(jconfig['images'])
-    image_width, image_height = column_width * 300, column_height * num_of_cols
+    image_width, image_height = column_width * num_of_cols, column_height * 300
 
     css_sprite = Image.new("RGBA", (image_width, image_height))
 
