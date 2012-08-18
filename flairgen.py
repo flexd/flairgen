@@ -194,7 +194,7 @@ def generate_flair(csv_file_out, img_file_out, css_file_out):
         css_classes.append(flair_class)
 
         ##] Add the current flair to the CSS file
-        css = ".flair-{0}:after{{ content: \"\"; background-position: {1}px -{2}px; width: {3}px; }}\n".format(flair_class, "0", sprite_row * row_height - row_height, column_width)
+        css = ".flair-{0}:after{{ content: \"\"; background-position: {1}px -{2}px; width: {3}px; }}\n".format(flair_class, "0", sprite_row * row_height - row_height, column_width * num_of_cols)
         css_file.write(css)
 
         ##] Add the current flair piece to our CSS Sprite image
