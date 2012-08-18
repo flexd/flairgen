@@ -24,6 +24,7 @@ CONFIG_FILE = "settings.json"
 COOKIE_FILE = "reddit.cookie"
 FLAIR_CSV_FILE = "output/flair.csv"
 FLAIR_IMG_FILE = "output/flair.png"
+FLAIR_CSS_FILE = "output/flair.css"
 #PNG_METADATA = 
 
 r = reddit.Reddit(user_agent="Fluxflashor's Flairgenerator Tool flairgen.py - github/fluxflashor/flairgen")
