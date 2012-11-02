@@ -15,7 +15,7 @@ import csv
 from itertools import product, chain
 
 ##] Import image library to generate sprites
-from PIL import Image
+import Image
 
 ##] Import reddit related libraries
 import praw as reddit # Python Reddit API Wrapper
@@ -23,9 +23,9 @@ import praw as reddit # Python Reddit API Wrapper
 ##] Super cool variables
 CONFIG_FILE = "settings.json"
 COOKIE_FILE = "reddit.cookie"
-FLAIR_CSV_FILE = "../wowflair/flair.csv"
-FLAIR_IMG_FILE = "../wowflair/flair.png"
-FLAIR_CSS_FILE = "../wowflair/flair.css"
+FLAIR_CSV_FILE = "output/flair.csv"
+FLAIR_IMG_FILE = "output/flair.png"
+FLAIR_CSS_FILE = "output/flair.css"
 #PNG_METADATA = 
 
 FLAIRGEN_START_BLOCK = "/***** [{{FLAIRGEN START DO NOT TOUCH}}] *****/"
@@ -187,23 +187,23 @@ def generate_flair(csv_file_out, img_file_out, css_file_out):
     #print r[1]
         #print zip(*items_list)
 
-    for r in product(*items_list):
+#    for r in product(*items_list):
         ##] Add the current flair piece to a list of CSS Classes
-        flair_class = "-".join(r)
-        css_classes.append(flair_class)
+ #       flair_class = "-".join(r)
+  #      css_classes.append(flair_class)
 
         ##] Add the current flair to the CSS file
-        css = ".flair-{0}:after{{ content: \"\"; background-position: {1}px -{2}px; width: {3}px; }}\n".format(flair_class, "0", sprite_row * row_height - row_height, column_width * num_of_cols)
-        css_file.write(css)
+   #     css = ".flair-{0}:after{{ content: \"\"; background-position: {1}px -{2}px; width: {3}px; }}\n".format(flair_class, "0", sprite_row * row_height - row_height, column_width * num_of_cols)
+    #    css_file.write(css)
 
         ##] Add the current flair piece to our CSS Sprite image
-        derp = 0
-        for item in r:
-            image_width, image_height = sprite_images[str(item)].size
-            css_sprite.paste(sprite_images[item], (derp * column_width, sprite_row * row_height - row_height))
-            derp += 1
+     #   derp = 0
+      #  for item in r:
+       #     image_width, image_height = sprite_images[str(item)].size
+        #    css_sprite.paste(sprite_images[item], (derp * column_width, sprite_row * row_height - row_height))
+         #   derp += 1
 
-        sprite_row += 1
+        #sprite_row += 1
 
     
     ##] Apply the CSS File footer and close it
